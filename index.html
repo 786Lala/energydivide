@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Energy Divide — SDG 12 · Responsible Consumption &amp; Production</title>
+<meta name="description" content="An interactive study of global energy consumption split between the world's richest and poorest halves, with a forecast lab for exploring the future of energy use and the policies that could close the gap.">
+<meta name="theme-color" content="#080b0a">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='30' fill='%23f2b84b'/%3E%3Cpath d='M32 2a30 30 0 0 1 0 60z' fill='%2335d3bf'/%3E%3C/svg%3E">
+<script>
+  (function () {
+    try {
+      var saved = localStorage.getItem("energy-divide-theme");
+      var theme = saved === "light" || saved === "dark"
+        ? saved
+        : (window.matchMedia && window.matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark");
+      document.documentElement.dataset.theme = theme;
+    } catch (e) { /* keep the dark default */ }
+  })();
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+<div class="noise" aria-hidden="true"></div>
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="site-header" id="siteHeader">
+  <div class="container header-inner">
+    <a href="#overview" class="brand">
+      <span class="brand-mark" aria-hidden="true"></span>
+      <span class="brand-name">energy<em>divide</em></span>
+      <span class="brand-chip">SDG&nbsp;12</span>
+    </a>
+    <nav class="nav" id="primaryNav" aria-label="Sections">
+      <a href="#overview" class="nav-link is-active">Overview</a>
+      <a href="#data" class="nav-link">Energy mix</a>
+      <a href="#disparity" class="nav-link">The divide</a>
+      <a href="#forecast" class="nav-link">Forecast lab</a>
+      <a href="#solutions" class="nav-link">Solutions</a>
+    </nav>
+    <div class="header-tools">
+      <button class="icon-btn" id="themeToggle" type="button" aria-label="Switch to light theme" title="Switch theme">
+        <svg class="icon-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.5 14.6A8.6 8.6 0 0 1 9.4 3.5a8.6 8.6 0 1 0 11.1 11.1Z"/></svg>
+        <svg class="icon-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><path d="M12 2v2.4M12 19.6V22M4.9 4.9l1.7 1.7M17.4 17.4l1.7 1.7M2 12h2.4M19.6 12H22M4.9 19.1l1.7-1.7M17.4 6.6l1.7-1.7"/></svg>
+      </button>
+      <button class="icon-btn menu-toggle" id="menuToggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="primaryNav">
+        <span></span><span></span>
+      </button>
+    </div>
+  </div>
+  <div class="scroll-progress" aria-hidden="true"><span id="scrollBar"></span></div>
+</header>
+
+<main id="main">
+
+  <!-- ============ HERO ============ -->
+  <section class="hero" id="overview">
+    <div class="hero-orb hero-orb-gold" aria-hidden="true"></div>
+    <div class="hero-orb hero-orb-teal" aria-hidden="true"></div>
+    <div class="container hero-grid">
+      <div class="hero-copy">
+        <p class="eyebrow"><span class="eyebrow-dot"></span>SDG 12 · Responsible consumption &amp; production</p>
+        <h1 class="hero-title">Half the world.<br><span class="grad-gold">Two energy</span><br><span class="grad-teal">realities.</span></h1>
+        <p class="lede">The highest-consuming half of humanity — the “rich half” — uses roughly <strong>78%</strong> of the world's primary energy and emits a similar share of its carbon. Explore three decades of the energy divide, then model the next thirty years.</p>
+        <div class="hero-actions">
+          <a href="#forecast" class="btn btn-primary">Open the forecast lab <span aria-hidden="true">→</span></a>
+          <a href="#data" class="btn btn-ghost">Explore the data</a>
+        </div>
+        <dl class="hero-stats">
+          <div class="stat">
+            <dt class="stat-value"><span data-count="3.5" data-decimals="1">3.5</span><em>×</em></dt>
+            <dd class="stat-label">energy gap<br>per person</dd>
+          </div>
+          <div class="stat">
+            <dt class="stat-value"><span data-count="77.8" data-decimals="1">77.8</span><em>%</em></dt>
+            <dd class="stat-label">of energy used<br>by the rich half</dd>
+          </div>
+          <div class="stat">
+            <dt class="stat-value"><span data-count="750">750</span><em>M</em></dt>
+            <dd class="stat-label">people without<br>electricity</dd>
+          </div>
+          <div class="stat">
+            <dt class="stat-value"><span data-count="2.3" data-decimals="1">2.3</span><em>B</em></dt>
+            <dd class="stat-label">people without<br>clean cooking</dd>
+          </div>
+        </dl>
+      </div>
+
+      <div class="hero-panel">
+        <div class="panel-glow" aria-hidden="true"></div>
+        <div class="glass split-card">
+          <div class="split-card-top">
+            <span class="kicker">World snapshot · 2023</span>
+            <span class="live-chip"><i class="live-dot"></i>Modelled</span>
+          </div>
+          <h2 class="split-title">Same people.<br>Unequal power.</h2>
+          <div class="split-legend">
+            <span><i class="dot dot-rich"></i>Rich half <b>4.0B</b></span>
+            <span><i class="dot dot-poor"></i>Poor half <b>4.0B</b></span>
+          </div>
+          <div class="split-rows" id="splitRows"></div>
+          <div class="split-card-foot">
+            <div class="ratio-block">
+              <span class="ratio-value" id="heroRatio">3.5×</span>
+              <span class="ratio-label">more primary energy<br>per person</span>
+            </div>
+            <div class="spark-wrap">
+              <span class="spark-label">Rich share 86%→78%</span>
+              <div class="spark" id="heroSpark" aria-hidden="true"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="container scroll-cue" aria-hidden="true"><span></span>Scroll to explore</div>
+  </section>
+
+  <!-- ============ ENERGY MIX ============ -->
+  <section class="section" id="data">
+    <div class="container">
+      <header class="section-head reveal">
+        <div class="section-head-copy">
+          <p class="eyebrow">01 · The energy mix</p>
+          <h2>Where the world's energy comes from</h2>
+          <p class="section-sub">Two halves of humanity, two very different energy diets. Scrub through the years to see how the mix has changed — and which sources still dominate each half.</p>
+        </div>
+        <div class="year-control" aria-label="Select year">
+          <div class="year-control-top">
+            <label for="yearRange">Year</label>
+            <output id="yearOut" for="yearRange">2023</output>
+          </div>
+          <div class="year-range-row">
+            <button class="play-btn" id="playBtn" type="button" aria-label="Play the timeline">&#9654;</button>
+            <input type="range" id="yearRange" min="1990" max="2023" step="1" value="2023" aria-label="Year from 1990 to 2023">
+          </div>
+          <div class="year-ticks"><span>1990</span><span>2000</span><span>2010</span><span>2023</span></div>
+        </div>
+      </header>
+
+      <div class="method-note glass reveal">
+        <span class="method-icon" aria-hidden="true">i</span>
+        <p><strong>How the halves are defined:</strong> the global population is ranked by per-capita primary energy use and split into two equal halves — not by national income. The rich half includes most OECD countries, China and other high-consumption economies; the poor half includes much of South Asia and sub-Saharan Africa. <strong>Units:</strong> EJ = exajoules (10¹⁸ J); GJ = gigajoules per person per year; t = metric tonnes.</p>
+      </div>
+
+      <div class="data-grid">
+        <article class="glass donut-card reveal" aria-labelledby="richCardTitle">
+          <div class="donut-card-head">
+            <div>
+              <span class="group-chip group-rich"><i></i>Rich half</span>
+              <h3 id="richCardTitle"><span id="richPeople">4.02</span>B people</h3>
+            </div>
+            <div class="donut-total"><strong id="richEnergy">479</strong><span>EJ total</span></div>
+          </div>
+          <div class="donut-body">
+            <div class="donut-holder" id="donutRich"></div>
+            <ul class="mix-legend" id="legendRich" aria-label="Rich half energy mix"></ul>
+          </div>
+          <div class="donut-foot">
+            <span><b id="richCapita">119</b> GJ per person</span>
+            <span><b id="richCo2">7.1</b> t CO₂ per person</span>
+          </div>
+        </article>
+
+        <article class="glass donut-card reveal" aria-labelledby="poorCardTitle">
+          <div class="donut-card-head">
+            <div>
+              <span class="group-chip group-poor"><i></i>Poor half</span>
+              <h3 id="poorCardTitle"><span id="poorPeople">4.03</span>B people</h3>
+            </div>
+            <div class="donut-total"><strong id="poorEnergy">137</strong><span>EJ total</span></div>
+          </div>
+          <div class="donut-body">
+            <div class="donut-holder" id="donutPoor"></div>
+            <ul class="mix-legend" id="legendPoor" aria-label="Poor half energy mix"></ul>
+          </div>
+          <div class="donut-foot">
+            <span><b id="poorCapita">34</b> GJ per person</span>
+            <span><b id="poorCo2">1.8</b> t CO₂ per person</span>
+          </div>
+        </article>
+
+        <aside class="glass insight-card reveal" aria-labelledby="insightTitle">
+          <p class="kicker" id="insightTitle">World total</p>
+          <div class="insight-big"><strong id="worldEnergy">616</strong><span>EJ</span></div>
+          <p class="insight-sub">Primary energy consumed in <span id="insightYear">2023</span> by <span id="worldPop">8.05</span> billion people.</p>
+          <div class="insight-divider"></div>
+          <div class="insight-stat"><span>Rich half's share</span><b id="richShare">77.8%</b></div>
+          <div class="insight-stat"><span>Fossil fuel share</span><b id="fossilShare">79%</b></div>
+          <div class="insight-stat"><span>Traditional biomass</span><b id="biomassShare">9%</b></div>
+          <div class="world-mix-wrap">
+            <span class="mini-label">World energy mix</span>
+            <div class="world-mix" id="worldMix" aria-hidden="true"></div>
+          </div>
+          <p class="insight-note" id="insightNote">The poor half relies on traditional biomass for about 41% of its energy — a source that is inefficient, polluting and linked to millions of premature deaths each year.</p>
+        </aside>
+      </div>
+
+      <div class="glass source-panel reveal">
+        <div class="panel-head">
+          <div>
+            <h3>Energy by source, rich vs poor</h3>
+            <p class="panel-sub">Hover a bar to compare the two halves.</p>
+          </div>
+          <div class="seg" id="sourceUnitSeg" role="group" aria-label="Choose unit">
+            <button type="button" data-unit="share" class="is-active">Share of mix</button>
+            <button type="button" data-unit="total">Total (EJ)</button>
+            <button type="button" data-unit="capita">Per person (GJ)</button>
+          </div>
+        </div>
+        <div class="source-header"><span></span><span class="source-header-bars"><span><i class="dot dot-rich"></i>Rich half</span><span><i class="dot dot-poor"></i>Poor half</span></span></div>
+        <div id="sourceBars" class="source-bars"></div>
+        <p class="panel-note" id="sourceNote">Bars are scaled to the largest value shown. Shares are a percentage of each half's own energy mix.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ DISPARITY ============ -->
+  <section class="section" id="disparity">
+    <div class="container">
+      <header class="section-head reveal">
+        <div class="section-head-copy">
+          <p class="eyebrow">02 · The divide</p>
+          <h2>One planet, two energy lifestyles</h2>
+          <p class="section-sub">The gap is not only about how much energy is used. It shows up in electricity, clean cooking, materials and carbon — and it has narrowed far too slowly.</p>
+        </div>
+        <span class="section-badge">2023 snapshot</span>
+      </header>
+
+      <div class="metrics-grid" id="metricsGrid"></div>
+
+      <div class="trend-grid">
+        <div class="glass chart-card reveal">
+          <div class="chart-card-head">
+            <div>
+              <h3>The rich half's share of global energy</h3>
+              <p>Share of world primary energy consumed by the richest 50%.</p>
+            </div>
+            <span class="delta-chip">86% → 78%</span>
+          </div>
+          <div class="chart" id="shareChart"></div>
+          <p class="panel-note">The divide is narrowing — but at this pace, the rich half would still consume more than half of the world's energy in 2050.</p>
+        </div>
+
+        <div class="glass chart-card reveal">
+          <div class="chart-card-head">
+            <div>
+              <h3>The per-person energy gap</h3>
+              <p>How many times more energy the average rich-half person uses.</p>
+            </div>
+            <span class="delta-chip">6.1× → 3.5×</span>
+          </div>
+          <div class="chart" id="gapChart"></div>
+          <p class="panel-note">Catching up is real, but slow: a person in the rich half still uses more than three times the energy of a person in the poor half.</p>
+        </div>
+      </div>
+
+      <div class="callout reveal">
+        <p class="callout-label">The disparity in one sentence</p>
+        <p class="callout-text">A person in the rich half uses <strong id="calloutRatio">3.5×</strong> the primary energy, <strong>9.3×</strong> the electricity and <strong>5×</strong> the materials of a person in the poor half — while <strong>2.3 billion</strong> people still cook with wood, charcoal or dung.</p>
+        <span class="callout-mark" aria-hidden="true">12</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ FORECAST ============ -->
+  <section class="section" id="forecast">
+    <div class="container">
+      <header class="section-head reveal">
+        <div class="section-head-copy">
+          <p class="eyebrow">03 · Forecast lab</p>
+          <h2>What happens if nothing changes?</h2>
+          <p class="section-sub">The dashed line is the current trajectory — today's trends, carried forward. Move the levers or add interventions to build a different future and watch the gap respond.</p>
+        </div>
+        <span class="section-badge badge-live"><i class="live-dot"></i>Live model</span>
+      </header>
+
+      <div class="lab-grid">
+        <aside class="glass control-panel">
+          <p class="control-title">Scenario</p>
+          <div class="preset-row" id="presets" role="group" aria-label="Scenario presets">
+            <button type="button" class="preset is-active" data-preset="bau">Current trajectory</button>
+            <button type="button" class="preset" data-preset="sdg">SDG 12 pathway</button>
+            <button type="button" class="preset" data-preset="converge">Convergence first</button>
+          </div>
+          <p class="preset-state" id="presetState">Baseline · no additional interventions</p>
+
+          <div class="control-divider"></div>
+
+          <div class="slider" data-control="targetYear">
+            <div class="slider-top"><label for="targetYear">Target year</label><output id="targetYearOut" for="targetYear">2050</output></div>
+            <input type="range" id="targetYear" min="2030" max="2060" step="1" value="2050">
+            <p class="slider-hint">How far ahead to project.</p>
+          </div>
+          <div class="slider" data-control="popGrowth">
+            <div class="slider-top"><label for="popGrowth">World population growth</label><output id="popGrowthOut" for="popGrowth">+0.80% / yr</output></div>
+            <input type="range" id="popGrowth" min="0.2" max="1.6" step="0.05" value="0.8">
+            <p class="slider-hint">UN mid-range is about 0.8% today.</p>
+          </div>
+          <div class="slider" data-control="richGrowth">
+            <div class="slider-top"><label for="richGrowth">Rich-half demand growth</label><output id="richGrowthOut" for="richGrowth">+0.70% / yr</output></div>
+            <input type="range" id="richGrowth" min="-1" max="2.5" step="0.05" value="0.7">
+            <p class="slider-hint">Per-person energy growth before efficiency.</p>
+          </div>
+          <div class="slider" data-control="poorGrowth">
+            <div class="slider-top"><label for="poorGrowth">Poor-half demand growth</label><output id="poorGrowthOut" for="poorGrowth">+1.90% / yr</output></div>
+            <input type="range" id="poorGrowth" min="0.5" max="4" step="0.05" value="1.9">
+            <p class="slider-hint">Development and access drive this higher.</p>
+          </div>
+          <div class="slider" data-control="efficiency">
+            <div class="slider-top"><label for="efficiency">Efficiency improvement</label><output id="efficiencyOut" for="efficiency">−0.30% / yr</output></div>
+            <input type="range" id="efficiency" min="0" max="2.5" step="0.05" value="0.3">
+            <p class="slider-hint">Cuts demand growth in both halves.</p>
+          </div>
+
+          <div class="control-divider"></div>
+
+          <div class="intervention-head">
+            <p class="control-title">Interventions</p>
+            <span class="count-chip" id="interventionCount">0 selected</span>
+          </div>
+          <ul class="intervention-list" id="interventionList"></ul>
+
+          <div class="control-actions">
+            <button type="button" class="btn btn-ghost btn-sm" id="resetBtn">Reset</button>
+            <button type="button" class="btn btn-ghost btn-sm" id="csvBtn">Download CSV</button>
+          </div>
+        </aside>
+
+        <div class="lab-main">
+          <div class="glass chart-card forecast-card reveal">
+            <div class="forecast-head">
+              <div class="tabs" id="forecastTabs" role="tablist" aria-label="Forecast metric">
+                <button type="button" role="tab" id="tab-energy" aria-selected="true" aria-controls="forecastPanel" tabindex="0" class="is-active" data-tab="energy">Energy use</button>
+                <button type="button" role="tab" id="tab-capita" aria-selected="false" aria-controls="forecastPanel" tabindex="-1" data-tab="capita">Per person</button>
+                <button type="button" role="tab" id="tab-co2" aria-selected="false" aria-controls="forecastPanel" tabindex="-1" data-tab="co2">CO₂</button>
+              </div>
+              <div class="forecast-legend" id="forecastLegend"></div>
+            </div>
+            <div class="forecast-panel" id="forecastPanel" role="tabpanel" aria-labelledby="tab-energy" tabindex="0">
+              <div class="chart chart-lg" id="forecastChart"></div>
+              <p class="chart-caption" id="forecastCaption"></p>
+              <div class="outcome-grid" id="outcomes"></div>
+            </div>
+          </div>
+
+          <details class="glass assumptions">
+            <summary>How the forecast model works</summary>
+            <div class="assumptions-body">
+              <p>Each year, per-person energy use compounds at the chosen demand growth rate, minus efficiency gains, plus the effect of selected interventions. Population grows at the chosen rate and is split equally between the two halves. Energy totals are per-person use × population; CO₂ is energy × the carbon intensity of each half, which falls faster when clean-energy policies are selected.</p>
+              <p>The dashed “current trajectory” holds today's rates constant: +0.4%/yr rich-half demand, +1.6%/yr poor-half demand, 0.4%/yr efficiency and 1.0%/yr decarbonisation. It is a trend extrapolation, not a prediction. All figures are illustrative and rounded for teaching purposes.</p>
+            </div>
+          </details>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ SOLUTIONS ============ -->
+  <section class="section" id="solutions">
+    <div class="container">
+      <header class="section-head reveal">
+        <div class="section-head-copy">
+          <p class="eyebrow">04 · Closing the gap</p>
+          <h2>Steps that would actually narrow it</h2>
+          <p class="section-sub">No single lever is enough. The gap closes fastest when high-consuming economies consume less, clean energy reaches everyone, and materials circulate for longer. Add any step to the forecast to see its effect.</p>
+        </div>
+        <a href="#forecast" class="btn btn-ghost btn-sm">Back to forecast</a>
+      </header>
+
+      <div class="filter-row" id="solutionFilters" role="group" aria-label="Filter solutions"></div>
+      <div class="solutions-grid" id="solutionsGrid"></div>
+
+      <div class="closing-strip reveal">
+        <div>
+          <p class="eyebrow">The bottom line</p>
+          <h3>SDG 12 is not about using less everywhere.<br>It is about using <span class="grad-gold">enough</span>, <span class="grad-teal">fairly</span>, and cleanly.</h3>
+        </div>
+        <a href="#forecast" class="btn btn-primary">Model your own pathway <span aria-hidden="true">→</span></a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="container footer-grid">
+    <div class="footer-brand">
+      <a href="#overview" class="brand">
+        <span class="brand-mark" aria-hidden="true"></span>
+        <span class="brand-name">energy<em>divide</em></span>
+      </a>
+      <p>An interactive study of global energy inequality and sustainable consumption, built around SDG 12.</p>
+      <div class="sdg-tags"><span>12.1</span><span>12.2</span><span>12.5</span><span>12.6</span><span>12.7</span></div>
+    </div>
+    <div class="footer-col">
+      <h4>Data &amp; method</h4>
+      <p>Figures are modelled from public datasets and rounded for illustration. Population halves are ranked by per-capita primary energy use, not national income.</p>
+      <p class="footer-sources">IEA · World Bank · Our World in Data · UN SDG 7 &amp; 12 · IPCC AR6</p>
+    </div>
+    <div class="footer-col">
+      <h4>Please note</h4>
+      <p>This is an educational project, not a policy-grade model. Projections are scenario illustrations, not predictions. Use the assumptions panel in the forecast lab to inspect the method.</p>
+      <p class="footer-copy">© <span id="footerYear">2026</span> Energy Divide · Built for SDG 12</p>
+    </div>
+  </div>
+</footer>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script src="assets/js/data.js"></script>
+<script src="assets/js/charts.js"></script>
+<script src="assets/js/app.js"></script>
+</body>
+</html>
